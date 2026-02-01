@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#000000">
+
+<script>
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register("sw.js");
+}
+</script>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Craft Thriller</title>
+
+<meta name="theme-color" content="#FF4081">
+
+<style>
+body{
+margin:0;
+font-family:system-ui,-apple-system,BlinkMacSystemFont;
+background-image:url('https://www.transparenttextures.com/patterns/canvas.png');
+background-attachment:fixed;
+color:#111;
+}
+
+/* HERO FADE */
+@keyframes fadeBio{0%{opacity:.6}100%{opacity:1}}
+
+/* GALLERY */
+.art-gallery{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+gap:15px;
+padding:20px;
+}
+.art-item{
+position:relative;
+overflow:hidden;
+border-radius:14px;
+}
+.art-item img{
+width:100%;
+height:100%;
+object-fit:cover;
+cursor:pointer;
+}
+
+/* TEXT OVERLAY (INSTAGRAM STYLE) */
+.text-overlay{
+position:absolute;
+bottom:12px;
+left:12px;
+right:12px;
+color:white;
+font-size:16px;
+font-weight:600;
+background:rgba(0,0,0,.45);
+padding:6px 10px;
+border-radius:8px;
+cursor:text;
+user-select:text;
+}
+.admin .text-overlay{
+outline:1px dashed #FF4081;
+}
+
+/* SLIDER */
+.art-slider{overflow:hidden;border-radius:14px;margin:40px 20px}
+.art-track{
+display:flex;
+width:max-content;
+animation:scrollArt 30s linear infinite
+}
+.art-track img{
+width:250px;
+height:300px;
+object-fit:cover;
+margin-right:12px;
+border-radius:12px
+}
+@keyframes scrollArt{
+0%{transform:translateX(0)}
+100%{transform:translateX(-50%)}
+}
+
+/* QUOTES */
+.quote-box{
+background:#111;
+color:white;
+padding:45px 20px;
+text-align:center;
+border-radius:12px;
+margin:60px 20px
+}
+.quote{
+font-style:italic;
+margin:10px 0
+}
+
+/* TIMELINE */
+.timeline{
+max-width:800px;
+margin:60px auto;
+border-left:3px solid #FF4081;
+padding-left:20px
+}
+.timeline-item{
+margin-bottom:35px;
+position:relative
+}
+.timeline-item::before{
+content:'';
+position:absolute;
+left:-11px;
+top:5px;
+width:18px;
+height:18px;
+background:#FF4081;
+border-radius:50%
+}
+
+/* ADMIN PANEL */
+#admin-panel{
+display:none;
+position:fixed;
+top:0;left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,.95);
+z-index:9999;
+color:white;
+padding:30px;
+}
+#drop-zone{
+border:2px dashed #FF4081;
+padding:40px;
+border-radius:14px;
+text-align:center;
+margin-top:20px;
+}
+
+/* FLOAT CTA */
+.float-contact{
+position:fixed;
+bottom:20px;
+right:20px;
+background:#FF4081;
+color:white;
+padding:14px 18px;
+border-radius:50px;
+font-weight:bold;
+text-decoration:none;
+box-shadow:0 0 15px rgba(0,0,0,.4);
+z-index:999;
+
+.post{
+  background:#000;
+  margin:20px auto;
+  max-width:420px;
+  border-radius:12px;
+  overflow:hidden;
+}
+
+.post video,
+.post img{
+  width:100%;
+}
+
+.caption{
+  padding:12px;
+  color:#fff;
+}
+
+.text-layer{
+  position:absolute;
+  top:20px;
+  left:20px;
+  color:white;
+  font-size:20px;
+  font-weight:600;
+  cursor:move;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- HERO -->
+<section style="background:linear-gradient(135deg,#0f0f0f,#1c1c1c);padding:80px 20px;text-align:center;color:white">
+<img src="https://thecraftthriller.wordpress.com/wp-content/uploads/2026/02/picsart_03-02-03.23.00_1_1.jpg"
+style="width:140px;height:140px;border-radius:50%;border:4px solid #FF4081;box-shadow:0 0 25px rgba(255,64,129,.4);margin-bottom:18px">
+
+<img src="https://thecraftthriller.wordpress.com/wp-content/uploads/2026/02/cropped-whatsapp-image-2026-01-30-at-6.44.18-pm.jpeg?w=300"
+style="width:110px;display:block;margin:0 auto 15px">
+
+<h1 style="color:#FF4081">The Craft Thriller</h1>
+<p>Recycling • Art • Culture • Social Impact</p>
+
+<div style="max-width:720px;margin:auto;background:#111;padding:22px;border-radius:12px;animation:fadeBio 8s infinite alternate">
+Jane Emmanuel is a self-taught Nigerian artist transforming recycled materials into meaningful art, blending sustainability, culture, and imagination.
+</div>
+</section>
+
+
+
+<!-- FEATURED SLIDER -->
+<div class="art-slider">
+<div class="art-track">
+<img src="https://thecraftthriller.wordpress.com/wp-content/uploads/2025/11/img-20251120-wa01336209169690610044162.jpg">
+<img src="https://thecraftthriller.wordpress.com/wp-content/uploads/2025/11/img_20251117_174415_3357e22457484650783992630.jpg">
+<img src="https://thecraftthriller.wordpress.com/wp-content/uploads/2026/01/img_20260128_170759_1817e25731441175630966669.jpg">
+<img src="https://thecraftthriller.wordpress.com/wp-content/uploads/2026/01/img_20260126_183739_5107e22681429200667237006.jpg">
+</div>
+</div>
+
+<!-- GALLERY -->
+<h2 style="text-align:center">Selected Works</h2>
+<div class="art-gallery" id="gallery">
+
+<div class="art-item"><img src="https://thecraftthriller.wordpress.com/wp-content/uploads/2026/01/inshot_20250819_1142468281940828673842256128.jpg"><div class="text-overlay">Recycled Mixed Media</div></div>
+<div class="art-item"><img src="https://thecraftthriller.wordpress.com/wp-content/uploads/2026/01/screenshot_20231015-152706_14757726573779043754.jpg"><div class="text-overlay">Material Reimagination</div></div>
+<div class="art-item"><img src="https://thecraftthriller.wordpress.com/wp-content/uploads/2026/01/screenshot_20231225-110928_18680776629959733549.jpg"><div class="text-overlay">Storytelling Craft</div></div>
+<div class="art-item"><img src="https://thecraftthriller.wordpress.com/wp-content/uploads/2026/01/screenshot_20231219-200031_1505951511484140192.jpg"><div class="text-overlay">Community Design</div></div>
+<div class="art-item"><img src="https://thecraftthriller.wordpress.com/wp-content/uploads/2026/01/meitu_20260131_2247571315969063932369952478.jpg"><div class="text-overlay">Experimental Waste Art</div></div>
+
+</div>
+<!-- ADMIN POST CREATOR (ADMIN ONLY) -->
+<section id="adminPanel" hidden>
+  <input type="file" id="mediaInput" accept="image/*,video/*">
+  <textarea id="captionInput" placeholder="Write caption..."></textarea>
+  <button onclick="createPost()">Post</button>
+</section>
+
+<!-- SOCIAL FEED -->
+<section id="feed"></section>
+
+<!-- QUOTES -->
+<div class="quote-box">
+<p class="quote">“Art gives discarded things a second life.”</p>
+<p class="quote">“Sustainability is creativity with responsibility.”</p>
+<p class="quote">“Culture grows when we create.”</p>
+<p class="quote">“Waste becomes wonder.”</p>
+</div>
+
+<!-- TIMELINE -->
+<div class="timeline">
+<div class="timeline-item"><h3>Community Recycling Workshops</h3><p>Youth-centered sustainability art sessions.</p></div>
+<div class="timeline-item"><h3>Cultural Craft Showcases</h3><p>Nigerian heritage storytelling through recycled forms.</p></div>
+<div class="timeline-item"><h3>Ongoing Experimental Practice</h3><p>Exhibitions, festivals, collaborations.</p></div>
+</div>
+
+<a href="https://wa.me/2348108179570" class="float-contact">💬 Collaborate</a>
+
+<script>
+const ADMIN_PASSWORD="craftthriller";
+let isAdmin=false;
+
+/* ADMIN LOGIN */
+document.addEventListener("keydown",e=>{
+if(e.ctrlKey&&e.shiftKey&&e.key==="A"){
+if(prompt("Admin password")==ADMIN_PASSWORD){
+isAdmin=true;
+document.body.classList.add("admin");
+enableEditing();
+alert("Admin mode enabled");
+}else alert("Wrong password");
+}
+});
+
+/* ENABLE TEXT EDITING */
+function enableEditing(){
+document.querySelectorAll(".text-overlay").forEach((t,i)=>{
+t.contentEditable=true;
+t.style.position="absolute";
+t.oninput=()=>localStorage.setItem("text_"+i,t.innerText);
+t.innerText=localStorage.getItem("text_"+i)||t.innerText;
+dragText(t);
+});
+}
+
+/* DRAG TEXT */
+function dragText(el){
+let x,y;
+el.onmousedown=e=>{
+if(!isAdmin)return;
+x=e.offsetX;y=e.offsetY;
+document.onmousemove=m=>{
+el.style.left=m.pageX-x-el.parentElement.offsetLeft+"px";
+el.style.top=m.pageY-y-el.parentElement.offsetTop+"px";
+};
+document.onmouseup=()=>document.onmousemove=null;
+};
+}
+</script>
+<script>
+const ADMIN_PASS = "craftadmin";
+let isAdmin = false;
+
+function loginAdmin(){
+  if(prompt("Admin password") === ADMIN_PASS){
+    isAdmin = true;
+    document.getElementById("adminPanel").hidden = false;
+    alert("Admin mode enabled");
+  }
+}
+
+function createPost(){
+  const mediaInput = document.getElementById("mediaInput");
+  const captionInput = document.getElementById("captionInput");
+  const feed = document.getElementById("feed");
+
+  const file = mediaInput.files[0];
+  if(!file) return alert("Select an image or video");
+
+  const url = URL.createObjectURL(file);
+  const type = file.type.startsWith("video") ? "video" : "img";
+
+  const post = document.createElement("div");
+  post.className = "post";
+  post.innerHTML = `
+    <div style="position:relative">
+      <${type} src="${url}" ${type==="video"?"controls":""}></${type}>
+      <div class="text-layer" contenteditable="true">Tap to write</div>
+    </div>
+    <div class="caption" contenteditable="true">${captionInput.value}</div>
+  `;
+
+  feed.prepend(post);
+
+  mediaInput.value = "";
+  captionInput.value = "";
+}
+
+/* OPTIONAL: Press Ctrl + Shift + A to login */
+document.addEventListener("keydown", e => {
+  if(e.ctrlKey && e.shiftKey && e.key === "A"){
+    loginAdmin();
+  }
+});
+</script>
+
+</body>
+</html>
